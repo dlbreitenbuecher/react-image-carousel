@@ -4,12 +4,23 @@ import image1 from "./image1.jpg";
 import image2 from "./image2.jpg";
 import image3 from "./image3.jpg";
 import Card from "./Card";
+/** Accepts props : cardData[{src : "", caption: ""}, ...]
+ *                : title = ""
+ * Have one state to remember card Index
+ * Return 2 buttons, forward and backward
+ * when we click on these buttons we set the cardIndex either +1 or -1
+ * Render Card based on the cardData along with index of current Card and total number of cards 
+ * 
+ * App -> Carousel -> Card
+*/
 
 function Carousel(props) {
   const [cardIdx, setCardIdx] = useState(0);
   const card = props.cardData[cardIdx];
   const total = props.cardData.length;
   const goForward = () => setCardIdx(cardIdx + 1);
+  const goBackward = () => setCardIdx(cardIdx - 1);
+  //TODO: Ask if this is a function expression
 
   return (
     <div className="Carousel">
@@ -17,7 +28,7 @@ function Carousel(props) {
       <div className="Carousel-main">
         <i
           className="fas fa-chevron-circle-left fa-2x"
-          onClick={goForward}
+          onClick={goBackward}
           data-testid="left-arrow"
         />
         <Card
