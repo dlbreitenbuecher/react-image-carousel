@@ -1,8 +1,11 @@
 import React from "react";
 import "./Card.css";
 
+
 /** Accepts props : caption, src, currNum, totalNum
+ * 
  * renders Image with these details
+ * 
  * Carousel -> Card -> (view)
 */
 function Card(props) {

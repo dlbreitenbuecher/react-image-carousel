@@ -4,7 +4,6 @@ import Carousel from "./Carousel";
 
 it("works when you click on the right arrow", function() {
   const { queryByTestId, queryByAltText } = render(<Carousel />);
-  debugger
   // expect the first image to show, but not the second
   expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
   expect(queryByAltText("Photo by Pratik Patel on Unsplash")).not.toBeInTheDocument();
@@ -25,7 +24,6 @@ it("matches snapshot", function () {
 
 it("works when you click on the left arrow", function() {
   const { queryByTestId, queryByAltText } = render(<Carousel />);
-  debugger
   // expect the first image to show, but not the second
   expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
   expect(queryByAltText("Photo by Pratik Patel on Unsplash")).not.toBeInTheDocument();
@@ -45,4 +43,23 @@ it("works when you click on the left arrow", function() {
   // expect the first image to show, but not the second
   expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
   expect(queryByAltText("Photo by Pratik Patel on Unsplash")).not.toBeInTheDocument();
+});
+
+// TODO Can make multiple snapshots after different interactions
+
+it("left arrow absent on first image", function() {
+  const { queryByTestId } = render(<Carousel />);
+
+  expect(queryByTestId('left-arrow')).not.toBeInTheDocument();
+});
+
+it("right arrow absent on last image", function() {
+  const { queryByTestId } = render(<Carousel />);
+  const rightArrow = queryByTestId("right-arrow");
+
+  // Moves us to image 3/3
+  fireEvent.click(rightArrow);
+  fireEvent.click(rightArrow);
+
+  expect(queryByTestId('right-arrow')).not.toBeInTheDocument();
 });
